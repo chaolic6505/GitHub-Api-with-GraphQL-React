@@ -1,7 +1,24 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useReducer, useCallback } from 'react';
 import github from '../db';
 import '../App.scss';
+import mainReducer from '../Reducer/main';
+
+const initialState = {
+	userName: '',
+	repoList: [],
+	pageCount: 10,
+	queryString: '',
+	totalCount: null,
+	startCursor: null,
+	endCursor: null,
+	hasPreviousPage: false,
+	hasNextPage: true,
+	paginationKeyword: 'first',
+	paginationString: '',
+};
 const Main: React.FC = () => {
+	//const [state, dispatch] = useReducer(mainReducer, initialState);
+
 	useEffect(() => {
 		const gquery = {
 			query: `
