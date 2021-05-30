@@ -1,4 +1,4 @@
-import { RepoInfo } from '../components/RepoInfo';
+import { IRepoInfo } from '../components/RepoInfo';
 
 export enum MainActionType {
 	setUserName = 'setUserName',
@@ -20,7 +20,7 @@ export interface MainAction {
 
 export interface MainState {
 	userName: string;
-	repoList: Array<RepoInfo>;
+	repoList: Array<IRepoInfo>;
 	pageCount: number;
 	queryString: string;
 	totalCount: unknown;

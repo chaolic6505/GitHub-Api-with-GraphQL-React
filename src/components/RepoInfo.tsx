@@ -1,11 +1,11 @@
-export interface RepoInfo {
+export interface IRepoInfo {
 	id: string;
 	name: string;
 	description: string;
 	url: string;
 }
 interface RepoListType {
-	items: Array<RepoInfo>;
+	items: Array<IRepoInfo>;
 }
 
 const RepoInfoList: React.FC<RepoListType> = (props) => {
