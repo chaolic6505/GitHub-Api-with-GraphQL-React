@@ -1,4 +1,6 @@
-enum MainActionType {
+import { RepoInfo } from '../components/RepoInfo';
+
+export enum MainActionType {
 	setUserName = 'setUserName',
 	setRepoList = 'setRepoList',
 	setPageCount = 'setPageCount',
@@ -13,14 +15,12 @@ enum MainActionType {
 }
 export interface MainAction {
 	type: MainActionType;
-	payload: {
-		data: [];
-	};
+	payload: any;
 }
 
 export interface MainState {
 	userName: string;
-	repoList: unknown;
+	repoList: Array<RepoInfo>;
 	pageCount: number;
 	queryString: string;
 	totalCount: unknown;
@@ -35,8 +35,13 @@ export interface MainState {
 export const mainReducer: React.Reducer<MainState, MainAction> = (
 	state,
 	action,
-) => {
+): MainState => {
 	switch (action.type) {
+		case MainActionType.setUserName:
+			return { ...state, userName: action.payload };
+		case MainActionType.setRepoList:
+			return { ...state, repoList: [...action.payload] };
+
 		default:
 			return state;
 	}
