@@ -1,12 +1,16 @@
-export const githubQuery: object = {
-	query: `
+type TGQ = (pageCount: number, queryString: string) => object;
+
+export const githubQuery: TGQ = (pageCount, queryString) => {
+	return {
+		query: `
 			{
 				viewer 
 				{
 					name
 				}
-				search(query: "user:chaolic6505 sort:updated-desc", type: REPOSITORY, first: 10) 
+				search(query: "${queryString} user:chaolic6505 sort:updated-desc", type: REPOSITORY, first: ${pageCount}) 
 				{
+						repositoryCount
 						nodes 
 					{
 						... on Repository 
@@ -25,6 +29,7 @@ export const githubQuery: object = {
   				}
 			}
 			`,
+	};
 };
 
 export default githubQuery;

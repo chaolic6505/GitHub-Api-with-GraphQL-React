@@ -23,7 +23,7 @@ export interface MainState {
 	repoList: Array<IRepoInfo>;
 	pageCount: number;
 	queryString: string;
-	totalCount: unknown;
+	totalCount: number;
 	startCursor: unknown;
 	endCursor: unknown;
 	hasPreviousPage: boolean;
@@ -41,6 +41,12 @@ export const mainReducer: React.Reducer<MainState, MainAction> = (
 			return { ...state, userName: action.payload };
 		case MainActionType.setRepoList:
 			return { ...state, repoList: [...action.payload] };
+		case MainActionType.setPageCount:
+			return { ...state, pageCount: action.payload };
+		case MainActionType.setQueryString:
+			return { ...state, queryString: action.payload }; 
+		case MainActionType.setTotalCount:
+			return { ...state, totalCount: action.payload };
 
 		default:
 			return state;
