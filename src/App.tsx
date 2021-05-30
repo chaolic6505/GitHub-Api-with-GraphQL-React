@@ -48,12 +48,14 @@ function App() {
 					type: MainActionType.setRepoList,
 					payload: viewer.search.nodes,
 				});
+				console.log(data);
 			});
 	}, []);
 
 	useEffect(() => {
 		fetchData();
 	}, [fetchData]);
+
 	return (
 		<Main name={state.userName}>
 			<RepoInfoList items={state.repoList} />

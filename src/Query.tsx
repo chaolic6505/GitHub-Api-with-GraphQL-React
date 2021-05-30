@@ -15,6 +15,11 @@ export const githubQuery: object = {
 							description
 							id
 							url
+							viewerSubscription
+							licenseInfo
+										{
+											spdxId
+										}
 						}
     				}
   				}

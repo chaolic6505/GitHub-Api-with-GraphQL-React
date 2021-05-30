@@ -1,8 +1,13 @@
+import LicenseInfo from './LicenseInfo';
 export interface IRepoInfo {
 	id: string;
 	name: string;
 	description: string;
 	url: string;
+	viewerSubscription: string;
+	licenseInfo: {
+		spdxId?: boolean;
+	};
 }
 interface RepoListType {
 	items: Array<IRepoInfo>;
@@ -20,6 +25,20 @@ const RepoInfoList: React.FC<RepoListType> = (props) => {
 									{repo.name}
 								</a>
 								<p className="small">{repo.description}</p>
+							</div>
+							<div className="text-nowrap ms-3">
+								<LicenseInfo licenseInfo={repo.licenseInfo} />
+								<span
+									className={
+										'px-1 py-0 ms-1 d-inline-block btn btn-sm ' +
+										(repo.viewerSubscription === 'SUBSCRIBED'
+											? 'btn-success'
+											: 'btn-outline-secondary')
+									}
+									style={{ fontSize: '1em' }}
+								>
+									{repo.viewerSubscription}
+								</span>
 							</div>
 						</div>
 					</li>
