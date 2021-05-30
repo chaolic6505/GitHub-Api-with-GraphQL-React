@@ -1,19 +1,24 @@
-type ActionType = {
-	type:
-		| 'setUserName'
-		| 'setRepoList'
-		| 'setPageCount'
-		| 'setQueryString'
-		| 'setTotalCount'
-		| 'setStartCursor'
-		| 'setEndCursor'
-		| 'setHasPreviousPage'
-		| 'setHasNextPage'
-		| 'setPaginationKeyword'
-		| 'setPaginationString';
-};
+enum MainActionType {
+	setUserName = 'setUserName',
+	setRepoList = 'setRepoList',
+	setPageCount = 'setPageCount',
+	setQueryString = 'setQueryString',
+	setTotalCount = 'setTotalCount',
+	setStartCursor = 'setStartCursor',
+	setEndCursor = 'setEndCursor',
+	setHasPreviousPage = 'setHasPreviousPage',
+	setHasNextPage = 'setHasNextPage',
+	setPaginationKeyword = 'setPaginationKeyword',
+	setPaginationString = 'setPaginationString',
+}
+export interface MainAction {
+	type: MainActionType;
+	payload: {
+		data: [];
+	};
+}
 
-type StateType = {
+export interface MainState {
 	userName: string;
 	repoList: unknown;
 	pageCount: number;
@@ -25,13 +30,14 @@ type StateType = {
 	hasNextPage: boolean;
 	paginationKeyword: string;
 	paginationString: string;
-};
+}
 
-export const mainReducer = (state: StateType, action: ActionType) => {
+export const mainReducer: React.Reducer<MainState, MainAction> = (
+	state,
+	action,
+) => {
 	switch (action.type) {
 		default:
 			return state;
 	}
 };
-
-export default mainReducer;
