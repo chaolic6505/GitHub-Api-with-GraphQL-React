@@ -16,6 +16,7 @@ interface RepoListType {
 }
 
 const RepoInfoList: React.FC<RepoListType> = (props) => {
+	
 	return (
 		<>
 			<ul className="list-group list-group-flush">

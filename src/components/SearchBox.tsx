@@ -1,4 +1,4 @@
-export interface ISearchBox {
+interface ISearchBox {
 	totalCount: number;
 	pageCount: number;
 	queryString: string;

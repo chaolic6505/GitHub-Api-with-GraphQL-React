@@ -12,7 +12,8 @@ export const githubQuery: TGQ = (
 	paginationString,
 ) => {
 	return {
-		query: `
+		query: 
+		`
 			{
 				viewer 
 				{
@@ -41,10 +42,16 @@ export const githubQuery: TGQ = (
 												}
 
 						}
+						 pageInfo {
+											startCursor
+											endCursor
+											hasNextPage
+											hasPreviousPage
+    									}
 						
   				}
 			}
-			`,
+		`,
 	};
 };
 

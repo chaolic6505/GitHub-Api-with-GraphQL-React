@@ -24,8 +24,8 @@ export interface MainState {
 	pageCount: number;
 	queryString: string;
 	totalCount: number;
-	startCursor: unknown;
-	endCursor: unknown;
+	startCursor: string;
+	endCursor: string;
 	hasPreviousPage: boolean;
 	hasNextPage: boolean;
 	paginationKeyword: string;
@@ -44,9 +44,24 @@ export const mainReducer: React.Reducer<MainState, MainAction> = (
 		case MainActionType.setPageCount:
 			return { ...state, pageCount: action.payload };
 		case MainActionType.setQueryString:
-			return { ...state, queryString: action.payload }; 
+			return { ...state, queryString: action.payload };
+
 		case MainActionType.setTotalCount:
 			return { ...state, totalCount: action.payload };
+
+		case MainActionType.setPaginationKeyword:
+			return { ...state, paginationKeyword: action.payload };
+		case MainActionType.setPaginationString:
+			return { ...state, paginationString: action.payload };
+
+		case MainActionType.setStartCursor:
+			return { ...state, startCursor: action.payload };
+		case MainActionType.setEndCursor:
+			return { ...state, endCursor: action.payload };
+		case MainActionType.setHasNextPage:
+			return { ...state, hasNextPage: action.payload };
+		case MainActionType.setHasPreviousPage:
+			return { ...state, hasPreviousPage: action.payload };
 
 		default:
 			return state;

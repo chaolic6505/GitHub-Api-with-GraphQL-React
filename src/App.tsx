@@ -11,6 +11,7 @@ import {
 import githubQuery from './Query';
 import RepoInfoList from './components/RepoInfo';
 import SearchBox from './components/SearchBox';
+import NavButtons from './components/NavBotton';
 
 const initialState: MainState = {
 	userName: ' ',
@@ -18,12 +19,12 @@ const initialState: MainState = {
 	pageCount: 10,
 	queryString: '',
 	totalCount: 0,
-	startCursor: null,
-	endCursor: null,
+	startCursor: ' ',
+	endCursor: ' ',
 	hasPreviousPage: false,
 	hasNextPage: true,
 	paginationKeyword: 'first',
-	paginationString: '',
+	paginationString: ' ',
 };
 
 function App() {
@@ -86,10 +87,10 @@ function App() {
 					type: MainActionType.setHasPreviousPage,
 					payload: prev,
 				});
-				console.log(total);
+				console.log(data);
 			});
 	}, [queryText]);
-
+	console.log(state);
 	useEffect(() => {
 		fetchData();
 	}, [fetchData]);
@@ -109,6 +110,22 @@ function App() {
 				onQueryChange={(myString) => {
 					dispatch({
 						type: MainActionType.setQueryString,
+						payload: myString,
+					});
+				}}
+			/>
+			<NavButtons
+				start={state.startCursor}
+				end={state.endCursor}
+				next={state.hasNextPage}
+				previous={state.hasPreviousPage}
+				onPage={(myKeyword, myString) => {
+					dispatch({
+						type: MainActionType.setPaginationKeyword,
+						payload: myKeyword,
+					});
+					dispatch({
+						type: MainActionType.setPaginationString,
 						payload: myString,
 					});
 				}}
