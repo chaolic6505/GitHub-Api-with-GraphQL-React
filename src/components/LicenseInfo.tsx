@@ -1,13 +1,11 @@
 import React from 'react';
-import IRepoInfo from './RepoInfo';
+
 export interface ILicenseInfo {
 	licenseInfo: {
 		spdxId?: boolean;
 	};
 }
 const LicenseInfo: React.FC<ILicenseInfo> = (repo) => {
-	let license: JSX.Element;
-
 	switch (repo.licenseInfo?.spdxId) {
 		case undefined:
 			return (
@@ -18,7 +16,6 @@ const LicenseInfo: React.FC<ILicenseInfo> = (repo) => {
 					NO LICENSE
 				</span>
 			);
-			break;
 
 		default:
 			return (

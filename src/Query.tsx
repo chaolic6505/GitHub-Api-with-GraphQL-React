@@ -1,6 +1,16 @@
-type TGQ = (pageCount: number, queryString: string) => object;
+type TGQ = (
+	pageCount: number,
+	queryString: string,
+	paginationKeyword: string,
+	paginationString: string,
+) => object;
 
-export const githubQuery: TGQ = (pageCount, queryString) => {
+export const githubQuery: TGQ = (
+	pageCount,
+	queryString,
+	paginationKeyword,
+	paginationString,
+) => {
 	return {
 		query: `
 			{
@@ -8,24 +18,30 @@ export const githubQuery: TGQ = (pageCount, queryString) => {
 				{
 					name
 				}
-				search(query: "${queryString} user:chaolic6505 sort:updated-desc", type: REPOSITORY, first: ${pageCount}) 
+				search(query: "${queryString} user:chaolic6505 sort:updated-desc", type: REPOSITORY, ${paginationKeyword}: ${pageCount}, ${paginationString}) 
 				{
 						repositoryCount
-						nodes 
-					{
-						... on Repository 
+						edges 
 						{
-							name
-							description
-							id
-							url
-							viewerSubscription
-							licenseInfo
-										{
-											spdxId
-										}
+							cursor
+										node 
+												{
+													... on Repository 
+													{
+														name
+														description
+														id
+														url
+														viewerSubscription
+														licenseInfo
+																		{
+																			spdxId
+																		}
+													}
+												}
+
 						}
-    				}
+						
   				}
 			}
 			`,

@@ -32,7 +32,12 @@ function App() {
 		initialState,
 	);
 	const queryText = JSON.stringify(
-		githubQuery(state.pageCount, state.queryString),
+		githubQuery(
+			state.pageCount,
+			state.queryString,
+			state.paginationKeyword,
+			state.paginationString,
+		),
 	);
 
 	const fetchData = useCallback(() => {
@@ -43,22 +48,47 @@ function App() {
 		})
 			.then((res) => res.json())
 			.then((data) => {
-				const viewer = data.data;
+				const repos = data.data.search.edges;
+				const viewer = data.data.viewer;
+				const total = data.data.search.repositoryCount;
+
+				const start = data.data.search.pageInfo?.startCursor;
+				const end = data.data.search.pageInfo?.endCursor;
+				const next = data.data.search.pageInfo?.hasNextPage;
+				const prev = data.data.search.pageInfo?.hasPreviousPage;
+
 				dispatch({
 					type: MainActionType.setUserName,
-					payload: viewer.viewer.name,
+					payload: viewer.name,
 				});
 				dispatch({
 					type: MainActionType.setRepoList,
-					payload: viewer.search.nodes,
+					payload: repos,
 				});
 				dispatch({
 					type: MainActionType.setTotalCount,
-					payload: viewer.search.nodes.repositoryCount,
+					payload: total,
 				});
-				console.log(data);
+
+				dispatch({
+					type: MainActionType.setStartCursor,
+					payload: start,
+				});
+				dispatch({
+					type: MainActionType.setEndCursor,
+					payload: end,
+				});
+				dispatch({
+					type: MainActionType.setHasNextPage,
+					payload: next,
+				});
+				dispatch({
+					type: MainActionType.setHasPreviousPage,
+					payload: prev,
+				});
+				console.log(total);
 			});
-	}, [state.pageCount, state.queryString]);
+	}, [queryText]);
 
 	useEffect(() => {
 		fetchData();
