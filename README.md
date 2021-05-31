@@ -6,7 +6,7 @@ This app allows users dynamically search GitHub repos under their account.
 
 The following Informations are displayed:
 
-1. GitHub  username
+1. GitHub  username and total numbers of reps.
 2. Numbers of repos to be display according to the users's setting.
 3. Licence under the repo.
 4. Search repos.
